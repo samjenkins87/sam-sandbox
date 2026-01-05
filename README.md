@@ -21,6 +21,7 @@ _Keep this updated as things grow._
 - **Parallel Workflow System** - Multi-environment Claude workflow (local + cloud)
   - `notes/parallel-workflow-plan.md` - Full workflow plan and architecture
   - `templates/CLAUDE.md.template` - Context handoff template for projects
+  - `templates/mermaid-examples.md` - Diagram templates (flowcharts, architecture, etc.)
   - `scripts/session-handoff.sh` - Quick handoff between local/cloud
   - `scripts/parallel-status.sh` - Check status of all work streams
   - `scripts/start-feature.sh` - Initialize a new feature with proper setup
