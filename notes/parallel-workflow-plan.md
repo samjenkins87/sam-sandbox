@@ -329,31 +329,244 @@ Notes: [any context the next session needs]
 
 ---
 
-## Open Questions to Resolve
+## Part 9: Ralph Wiggum - Autonomous Loops
 
-1. **Session persistence on cloud**: How to maintain context across claude.ai sessions?
-   - Option A: Always commit state before closing
-   - Option B: Use project files in repo as persistent memory
+Ralph Wiggum is an autonomous loop technique created by Geoffrey Huntley, heavily used by Boris Cherny (creator of Claude Code). It keeps Claude working on a task until completion criteria are met.
 
-2. **Conflict resolution**: When local and cloud both edit same files?
-   - Recommendation: Use sub-branches for parallel streams
+### The Core Concept
 
-3. **Mobile workflow**: What can realistically be done from phone?
-   - GitHub app for PR reviews
-   - Linear app for issue management
-   - Claude app for quick questions/planning
-   - Actual coding: probably just monitoring
+At its simplest, Ralph is a bash loop:
+```bash
+while true; do
+  claude "Your task prompt here"
+  # Loop continues until completion detected
+done
+```
 
-4. **Ralph Wiggum / Autonomous mode**:
-   - What's the actual plugin/feature being referenced?
-   - How to safely run autonomous loops?
-   - What guardrails are needed?
+The power comes from:
+1. **Persistence**: Claude keeps iterating even when it thinks it's "done"
+2. **Context accumulation**: Each iteration sees file changes from previous runs
+3. **Clear completion criteria**: The loop only exits when success is verified
+
+### Installation
+
+Using the `ralph-claude-code` implementation:
+
+```bash
+# One-time global install
+git clone https://github.com/frankbria/ralph-claude-code.git
+cd ralph-claude-code
+./install.sh
+
+# Per-project setup
+ralph-setup my-project
+# or import existing requirements:
+ralph-import requirements.md my-project
+```
+
+### Best Use Cases for Ralph
+
+| Good for Ralph | Not Good for Ralph |
+|----------------|-------------------|
+| Large refactors (Jest → Vitest) | Exploratory work |
+| Batch operations | Vague requirements |
+| Test coverage gaps | Creative decisions |
+| Framework migrations | Architecture design |
+| Documentation generation | Debugging unclear bugs |
+
+**The common thread**: Tasks with clear, verifiable completion criteria.
+
+### Boris's Key Insight
+
+> "Give Claude a way to verify its work. If Claude has that feedback loop, it will 2-3x the quality of the final result."
+
+This means:
+- Always include test commands in the prompt
+- Define what "done" looks like explicitly
+- Let Claude run tests/lints after each change
+
+### Example Ralph Commands
+
+```bash
+# Basic usage
+ralph "Migrate all tests from Jest to Vitest" --max-iterations 50
+
+# With monitoring
+ralph --monitor "Add TypeScript types to all JS files in src/"
+
+# With custom completion criteria
+ralph "Implement user authentication" \
+  --completion-promise "All auth tests pass and login flow works"
+
+# Rate-limited for cost control
+ralph --calls 50 "Generate API documentation for all endpoints"
+```
+
+### Ralph Project Structure
+
+Each Ralph-managed project gets:
+```
+project/
+├── PROMPT.md       # The main task instructions
+├── @fix_plan.md    # Prioritized task list (Ralph updates this)
+├── @AGENT.md       # Build/run/test instructions
+├── specs/          # Technical specifications
+└── logs/           # Execution history
+```
+
+### Safety Guardrails
+
+1. **Rate limiting**: Default 100 API calls/hour
+2. **Circuit breaker**: Stops after 3 loops with no file changes
+3. **Exit detection**: Recognizes "all tasks done" signals
+4. **5-hour limit**: Prompts to wait or exit at API limits
+5. **Timeout option**: `--timeout 30` for 30-minute max
+
+### Integrating Ralph with Parallel Sessions
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    YOUR WORKFLOW                         │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  Local Tab 1: Ralph Loop (autonomous)                   │
+│    └─ "Migrate database schema" --monitor               │
+│                                                          │
+│  Local Tab 2: Manual Claude (interactive)               │
+│    └─ Debugging, quick fixes, exploration               │
+│                                                          │
+│  Cloud Session: Planning/Review                         │
+│    └─ PRD work, code review, research                   │
+│                                                          │
+│  Mobile: Monitoring                                      │
+│    └─ Check Ralph progress, approve PRs                 │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Part 10: Mobile Workflow
+
+Mobile is for **monitoring, triggering, and approving** - not full coding.
+
+### What You Can Do From Phone
+
+| App | Actions |
+|-----|---------|
+| **Claude App** | Start a planning session, kick off research, quick questions |
+| **GitHub App** | Review PRs, approve merges, check CI status, read diffs |
+| **Linear App** | Triage issues, update priorities, check progress |
+| **Vercel App** | Check deploy status, view preview URLs |
+| **Terminal (SSH)** | Trigger Ralph loops, check logs (advanced) |
+
+### Mobile Trigger Patterns
+
+**Pattern 1: Kick off overnight work**
+1. Open Claude app on phone
+2. Connect to repo
+3. Start a Ralph loop: "Run test coverage and fill gaps"
+4. Check progress in morning
+
+**Pattern 2: Approve and merge from anywhere**
+1. Get GitHub notification on phone
+2. Review the diff in GitHub app
+3. Approve and merge if looks good
+4. Vercel auto-deploys
+
+**Pattern 3: Quick unblock**
+1. Get notification that CI failed
+2. Open GitHub app, check the error
+3. Open Claude app, describe the fix needed
+4. Claude pushes the fix, CI reruns
+
+### Mobile Session Start Template
+
+When starting a session from mobile, use clear, contained prompts:
+
+```
+Connect to [repo]. Checkout branch [branch-name].
+
+Read CLAUDE.md for context.
+
+Your task: [specific, completable task]
+
+When done:
+1. Run tests to verify
+2. Commit with message "[type]: [description]"
+3. Push to origin
+4. Update CLAUDE.md with what you did
+```
+
+---
+
+## Part 11: Linear ↔ GitHub Integration Test
+
+Since integration is already set up, verify it works:
+
+### Test Checklist
+
+- [ ] **Branch linking**: Create `feature/LIN-XXX-test`, verify it links in Linear
+- [ ] **Status sync**: Create a PR, verify Linear issue moves to "In Review"
+- [ ] **Auto-close**: Merge the PR, verify Linear issue closes
+- [ ] **Comments sync**: Comment on PR, check if it appears in Linear (if enabled)
+
+### Quick Test Script
+
+```bash
+# 1. Create a test issue in Linear, note the ID (e.g., LIN-999)
+
+# 2. Create test branch
+git checkout -b feature/LIN-999-integration-test
+
+# 3. Make a small change
+echo "# Integration Test" > test-integration.md
+git add test-integration.md
+git commit -m "test: verify Linear-GitHub integration"
+git push -u origin feature/LIN-999-integration-test
+
+# 4. Create PR via CLI
+gh pr create --title "Test: Linear Integration" --body "Testing LIN-999 integration"
+
+# 5. Check Linear - issue should show linked PR and move to "In Review"
+
+# 6. Merge PR
+gh pr merge --merge
+
+# 7. Check Linear - issue should be closed
+
+# 8. Cleanup
+git checkout main
+git branch -d feature/LIN-999-integration-test
+git push origin --delete feature/LIN-999-integration-test
+```
+
+---
+
+## Resolved Questions
+
+1. **Session persistence on cloud**: ✅ Solved via CLAUDE.md - commit state before closing, next session reads it.
+
+2. **Conflict resolution**: ✅ Use sub-branches (`feature/xxx--frontend`, `feature/xxx--backend`) for parallel streams.
+
+3. **Mobile workflow**: ✅ Monitoring, triggering, approving - not full coding. Use Claude/GitHub/Linear apps.
+
+4. **Ralph Wiggum**: ✅ Autonomous loop technique - see Part 9 above.
 
 ---
 
 ## Next Actions
 
-1. Review this plan and flag anything that doesn't fit your actual workflow
-2. Decide on the open questions above
-3. Start with Phase 1 implementation
-4. Test the handoff protocol with a real feature
+1. Install Ralph: `git clone https://github.com/frankbria/ralph-claude-code.git && cd ralph-claude-code && ./install.sh`
+2. Run the Linear ↔ GitHub test checklist above
+3. Try a simple Ralph loop on a contained task
+4. Test the mobile workflow with a real trigger
+
+---
+
+## Resources
+
+- [Ralph Wiggum on Awesome Claude](https://awesomeclaude.ai/ralph-wiggum)
+- [How Boris Uses Claude Code](https://paddo.dev/blog/how-boris-uses-claude-code/)
+- [Ralph Claude Code GitHub](https://github.com/frankbria/ralph-claude-code)
+- [Ralph Wiggum Technique Deep Dive](https://www.atcyrus.com/stories/ralph-wiggum-technique-claude-code-autonomous-loops)
