@@ -114,43 +114,50 @@ Linear uses a **three-panel layout** that is central to its UX:
 --status-cancelled: #EB5757;            /* Red for cancelled */
 --status-backlog: #828282;              /* Gray for backlog */
 
-/* Light Mode - Accent (Linear Blue) */
---accent-primary: #5E6AD2;              /* Primary brand color */
---accent-hover: #4F5ABF;                /* Hover state */
---accent-subtle: #EEF0FF;               /* Light accent background */
+/* Light Mode - Accent (CRISP AZURE - replaces Linear purple) */
+--accent-primary: #3B82F6;              /* Primary brand color - Blue-500 */
+--accent-hover: #2563EB;                /* Hover state - Blue-600 */
+--accent-light: #60A5FA;                /* Light variant - Blue-400 */
+--accent-subtle: rgba(59, 130, 246, 0.10);  /* Light accent background */
 ```
 
 ### 3.2 Dark Mode Palette
 
 ```css
-/* Dark Mode - Primary Surfaces */
---background-primary: #0D0D0D;          /* Main content background */
---background-secondary: #141414;        /* Sidebar background */
---background-tertiary: #1A1A1A;         /* Cards, elevated surfaces */
---background-elevated: #1F1F1F;         /* Modals, dropdowns */
---background-hover: #252525;            /* Hover states */
+/* Dark Mode - CRISP AZURE GRAPHITE THEME */
+/* Primary Surfaces - Deep Graphite */
+--background-primary: #0B0F14;          /* Deepest graphite - main background */
+--background-secondary: #14181F;        /* Sidebars, cards, panels */
+--background-tertiary: #1E293B;         /* Elevated surfaces */
+--background-elevated: #14181F;         /* Modals, dropdowns */
+--background-hover: #1E293B;            /* Hover states */
 
 /* Dark Mode - Text */
---text-primary: #FAFAFA;                /* Headlines, primary text */
---text-secondary: #A0A0A0;              /* Secondary labels */
---text-tertiary: #6B6B6B;               /* Placeholder, disabled */
+--text-primary: #E5E7EB;                /* Gray-200 - High legibility */
+--text-secondary: #94A3B8;              /* Slate-400 - Muted text */
+--text-tertiary: #64748B;               /* Slate-500 - Placeholder, disabled */
 --text-on-accent: #FFFFFF;              /* Text on colored backgrounds */
 
 /* Dark Mode - Borders & Dividers */
---border-primary: #2A2A2A;              /* Main borders */
---border-secondary: #1F1F1F;            /* Subtle dividers */
---border-focus: #5E6AD2;                /* Focus rings */
+--border-primary: #27272A;              /* Zinc-800 - Subtle structure */
+--border-secondary: #1F1F1F;            /* Even subtler */
+--border-focus: #3B82F6;                /* Focus rings - Azure */
 
-/* Dark Mode - Status Colors (same saturation, adjusted brightness) */
---status-in-progress: #F2C94C;
---status-completed: #6FCF97;
---status-cancelled: #EB5757;
+/* Dark Mode - Status Colors */
+--status-in-progress: #EAB308;          /* Yellow-500 */
+--status-completed: #22C55E;            /* Green-500 */
+--status-cancelled: #EF4444;            /* Red-500 */
 --status-backlog: #6B6B6B;
 
-/* Dark Mode - Accent */
---accent-primary: #5E6AD2;
---accent-hover: #6E7BE0;
---accent-subtle: #1A1D3D;
+/* Dark Mode - Accent (CRISP AZURE) */
+--accent-primary: #3B82F6;              /* Blue-500 - Primary brand */
+--accent-hover: #60A5FA;                /* Blue-400 - Hover/light variant */
+--accent-foreground: #60A5FA;           /* Text on accent backgrounds */
+--accent-subtle: rgba(59, 130, 246, 0.15);  /* Selection backgrounds */
+
+/* Azure Glow Effects */
+--azure-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.35);
+--azure-glow: 0 0 24px rgba(59, 130, 246, 0.25);
 ```
 
 ### 3.3 Color Usage Rules
