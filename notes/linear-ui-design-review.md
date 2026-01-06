@@ -86,79 +86,108 @@ Linear uses a **three-panel layout** that is central to its UX:
 
 ---
 
-## 3. Color System
+## 3. Color System (Vercel Geist + Crisp Azure)
 
-### 3.1 Light Mode Palette
+> **Updated**: Now using Vercel's Geist color system with pure black/white backgrounds
+> and Crisp Azure (#3B82F6) as the accent color.
+
+### 3.1 Light Mode Palette (Vercel Geist)
 
 ```css
-/* Light Mode - Primary Surfaces */
---background-primary: #FFFFFF;          /* Main content background */
---background-secondary: #FAFAFA;        /* Sidebar, elevated panels */
---background-tertiary: #F5F5F5;         /* Hover states, cards */
---background-elevated: #FFFFFF;         /* Modals, dropdowns */
+/* Light Mode - Primary Surfaces (Vercel style) */
+--background: #FFFFFF;                  /* Pure white - main background */
+--card: #FAFAFA;                        /* Cards, sidebars (accents-1) */
+--secondary: #F5F5F5;                   /* Hover states, tertiary surfaces */
+--popover: #FFFFFF;                     /* Modals, dropdowns */
 
-/* Light Mode - Text */
---text-primary: #1A1A1A;                /* Headlines, primary text */
---text-secondary: #6B6B6B;              /* Secondary labels, descriptions */
---text-tertiary: #9B9B9B;               /* Placeholder, disabled text */
---text-on-accent: #FFFFFF;              /* Text on colored backgrounds */
+/* Light Mode - Text (Pure black with Vercel gray scale) */
+--foreground: #000000;                  /* Pure black - primary text */
+--muted-foreground: #666666;            /* Secondary text (accents-5) */
+--placeholder: #888888;                 /* Placeholder (accents-4) */
 
-/* Light Mode - Borders & Dividers */
---border-primary: #E5E5E5;              /* Main borders */
---border-secondary: #EFEFEF;            /* Subtle dividers */
---border-focus: #5E6AD2;                /* Focus rings */
+/* Light Mode - Borders (Vercel style) */
+--border: #EAEAEA;                      /* Primary borders (accents-2) */
+--ring: rgba(59, 130, 246, 0.4);        /* Focus rings - Azure */
 
 /* Light Mode - Status Colors */
---status-in-progress: #F2C94C;          /* Yellow/amber for in progress */
---status-completed: #6FCF97;            /* Green for completed */
---status-cancelled: #EB5757;            /* Red for cancelled */
---status-backlog: #828282;              /* Gray for backlog */
+--status-in-progress: #F5A623;          /* Vercel amber */
+--status-completed: #0070F3;            /* Vercel blue */
+--status-error: #EE0000;                /* Vercel red */
+--status-muted: #888888;                /* Gray */
 
-/* Light Mode - Accent (CRISP AZURE - replaces Linear purple) */
---accent-primary: #3B82F6;              /* Primary brand color - Blue-500 */
---accent-hover: #2563EB;                /* Hover state - Blue-600 */
---accent-light: #60A5FA;                /* Light variant - Blue-400 */
---accent-subtle: rgba(59, 130, 246, 0.10);  /* Light accent background */
+/* Light Mode - Accent (CRISP AZURE) */
+--primary: #3B82F6;                     /* Blue-500 - Primary brand */
+--primary-hover: #2563EB;               /* Blue-600 - Hover state */
+--accent: rgba(59, 130, 246, 0.08);     /* Selection backgrounds */
+--accent-foreground: #3B82F6;           /* Text on accent backgrounds */
+
+/* Vercel Accent Scale (Light Mode) */
+--accents-1: #FAFAFA;
+--accents-2: #EAEAEA;
+--accents-3: #999999;
+--accents-4: #888888;
+--accents-5: #666666;
+--accents-6: #444444;
+--accents-7: #333333;
+--accents-8: #111111;
 ```
 
-### 3.2 Dark Mode Palette
+### 3.2 Dark Mode Palette (Vercel Geist Inverted)
 
 ```css
-/* Dark Mode - CRISP AZURE GRAPHITE THEME */
-/* Primary Surfaces - Deep Graphite */
---background-primary: #0B0F14;          /* Deepest graphite - main background */
---background-secondary: #14181F;        /* Sidebars, cards, panels */
---background-tertiary: #1E293B;         /* Elevated surfaces */
---background-elevated: #14181F;         /* Modals, dropdowns */
---background-hover: #1E293B;            /* Hover states */
+/* Dark Mode - Primary Surfaces (TRUE BLACK - Vercel style) */
+--background: #000000;                  /* Pure black - main background */
+--card: #111111;                        /* Cards, sidebars (accents-8 inverted) */
+--secondary: #1A1A1A;                   /* Hover states, tertiary surfaces */
+--popover: #111111;                     /* Modals, dropdowns */
 
-/* Dark Mode - Text */
---text-primary: #E5E7EB;                /* Gray-200 - High legibility */
---text-secondary: #94A3B8;              /* Slate-400 - Muted text */
---text-tertiary: #64748B;               /* Slate-500 - Placeholder, disabled */
---text-on-accent: #FFFFFF;              /* Text on colored backgrounds */
+/* Dark Mode - Text (Pure white with inverted gray scale) */
+--foreground: #FFFFFF;                  /* Pure white - primary text */
+--muted-foreground: #A1A1A1;            /* Secondary text */
+--placeholder: #666666;                 /* Placeholder */
 
-/* Dark Mode - Borders & Dividers */
---border-primary: #27272A;              /* Zinc-800 - Subtle structure */
---border-secondary: #1F1F1F;            /* Even subtler */
---border-focus: #3B82F6;                /* Focus rings - Azure */
+/* Dark Mode - Borders (Vercel style inverted) */
+--border: #333333;                      /* Primary borders (accents-7 inverted) */
+--ring: rgba(59, 130, 246, 0.5);        /* Focus rings - Azure */
 
 /* Dark Mode - Status Colors */
---status-in-progress: #EAB308;          /* Yellow-500 */
---status-completed: #22C55E;            /* Green-500 */
---status-cancelled: #EF4444;            /* Red-500 */
---status-backlog: #6B6B6B;
+--status-in-progress: #F5A623;          /* Vercel amber */
+--status-completed: #0070F3;            /* Vercel blue */
+--status-error: #FF4444;                /* Brighter red for dark */
+--status-muted: #666666;                /* Gray */
 
 /* Dark Mode - Accent (CRISP AZURE) */
---accent-primary: #3B82F6;              /* Blue-500 - Primary brand */
---accent-hover: #60A5FA;                /* Blue-400 - Hover/light variant */
+--primary: #3B82F6;                     /* Blue-500 - Primary brand */
+--primary-hover: #60A5FA;               /* Blue-400 - Lighter on hover in dark */
+--accent: rgba(59, 130, 246, 0.15);     /* Selection backgrounds */
 --accent-foreground: #60A5FA;           /* Text on accent backgrounds */
---accent-subtle: rgba(59, 130, 246, 0.15);  /* Selection backgrounds */
+
+/* Vercel Accent Scale (Dark Mode - INVERTED) */
+--accents-1: #111111;
+--accents-2: #222222;
+--accents-3: #333333;
+--accents-4: #444444;
+--accents-5: #666666;
+--accents-6: #888888;
+--accents-7: #999999;
+--accents-8: #FAFAFA;
 
 /* Azure Glow Effects */
---azure-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.35);
---azure-glow: 0 0 24px rgba(59, 130, 246, 0.25);
+--azure-focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.4);
+--azure-glow: 0 0 20px rgba(59, 130, 246, 0.15);
 ```
+
+### 3.3 Quick Reference Table
+
+| Token | Light Mode | Dark Mode |
+|-------|------------|-----------|
+| Background | `#FFFFFF` | `#000000` |
+| Card/Sidebar | `#FAFAFA` | `#111111` |
+| Border | `#EAEAEA` | `#333333` |
+| Text Primary | `#000000` | `#FFFFFF` |
+| Text Muted | `#666666` | `#A1A1A1` |
+| Accent | `#3B82F6` | `#3B82F6` |
+| Selection BG | `rgba(59,130,246,0.08)` | `rgba(59,130,246,0.15)` |
 
 ### 3.3 Color Usage Rules
 
