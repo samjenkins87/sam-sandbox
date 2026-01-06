@@ -1,0 +1,107 @@
+# CLAUDE.md - Project Context & Session State
+
+> This file is the "state handoff" between Claude sessions (local ↔ cloud).
+> Update it at the end of each session. Read it at the start of each session.
+
+## Project Overview
+
+**Project**: [Name]
+**Linear Project**: [Link or ID]
+**Stack**: [e.g., Next.js, Supabase, Tailwind]
+**Repo**: [GitHub URL]
+
+## Current Sprint Goal
+
+[What we're trying to accomplish this sprint]
+
+---
+
+## Active Work Streams
+
+| Branch | Owner | Status | Description |
+|--------|-------|--------|-------------|
+| `feature/LIN-xxx-name` | @local | In Progress | [description] |
+| `feature/LIN-yyy-name` | @cloud | Ready for Review | [description] |
+
+---
+
+## Last Session
+
+**Environment**: [Local Cursor / Cloud claude.ai / Mobile]
+**Date**: [YYYY-MM-DD HH:MM]
+**Duration**: [approximate]
+
+### What Was Done
+- [completed item 1]
+- [completed item 2]
+- [completed item 3]
+
+### Current State
+- **Working on**: [specific file or feature]
+- **Last file touched**: [path/to/file.ts]
+- **Tests passing**: [Yes/No/Partially]
+- **Builds clean**: [Yes/No]
+
+### Next Steps (Priority Order)
+1. [ ] [next task 1]
+2. [ ] [next task 2]
+3. [ ] [next task 3]
+
+---
+
+## Key Decisions Log
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| YYYY-MM-DD | [decision] | [why we decided this] |
+
+---
+
+## Blockers & Questions
+
+### Active Blockers
+- [ ] [blocker 1 - who can unblock]
+
+### Questions Needing Answers
+- [ ] [question 1]
+
+### Resolved (Keep for Context)
+- [x] [previously resolved item]
+
+---
+
+## Architecture Notes
+
+[Key architectural decisions, patterns in use, important file locations]
+
+### Key Files
+- `src/[important-file].ts` - [what it does]
+- `lib/[utility].ts` - [what it does]
+
+### Patterns in Use
+- [pattern 1]: [where/how it's used]
+
+---
+
+## Environment & Config
+
+### Required Environment Variables
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+# etc.
+```
+
+### Local Setup Notes
+[Any special setup required]
+
+---
+
+## Session Handoff Checklist
+
+Before ending a session, ensure:
+- [ ] All work committed with descriptive message
+- [ ] This CLAUDE.md file updated
+- [ ] Branch pushed to origin
+- [ ] Any blockers documented above
+- [ ] Linear issue status updated
